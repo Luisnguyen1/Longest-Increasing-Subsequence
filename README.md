@@ -34,21 +34,21 @@ Thuật toán sử dụng ba cấu trúc dữ liệu chính để lưu trữ th�
 
 ```mermaid
 flowchart TD
-    A[Phần tử hiện tại: nums[i]] --> B[Tìm kiếm nhị phân trong piles]
-    B --> C{Kết quả tìm kiếm?}
-    C -- "piles.end()" --> D[Mở rộng LIS]
-    C -- "Vị trí khác" --> E[Thay thế phần tử]
+    A["Phần tử hiện tại: nums[i]"] --> B["Tìm kiếm nhị phân trong piles"]
+    B --> C{"Kết quả tìm kiếm?"}
+    C -- "piles.end()" --> D["Mở rộng LIS"]
+    C -- "Vị trí khác" --> E["Thay thế phần tử"]
     
-    D --> D1[prev[i] = piles.back()]
-    D1 --> D2[piles.push_back(i)]
-    D2 --> D3[pos[i] = piles.size() - 1]
+    D --> D1["prev[i] = piles.back()"]
+    D1 --> D2["piles.push_back(i)"]
+    D2 --> D3["pos[i] = piles.size() - 1"]
     
-    E --> E1{it != piles.begin()?}
-    E1 -- Có --> E2[prev[i] = piles[it-piles.begin()-1]]
-    E1 -- Không --> E3[prev[i] = -1]
-    E2 --> E4[*it = i]
+    E --> E1{"it != piles.begin()?"}
+    E1 -- "Có" --> E2["prev[i] = piles[it-piles.begin()-1]"]
+    E1 -- "Không" --> E3["prev[i] = -1"]
+    E2 --> E4["*it = i"]
     E3 --> E4
-    E4 --> E5[pos[i] = it-piles.begin()]
+    E4 --> E5["pos[i] = it-piles.begin()"]
 ```
 
 ### Minh họa tìm kiếm nhị phân
@@ -57,16 +57,16 @@ flowchart TD
 flowchart LR
     subgraph "Binary Search"
         direction TB
-        B1[lower_bound] --> B2{So sánh nums[piles[mid]] với current}
-        B2 --> B3[Điều chỉnh left hoặc right]
+        B1["lower_bound"] --> B2{"So sánh nums[piles[mid]] với current"}
+        B2 --> B3["Điều chỉnh left hoặc right"]
         B3 --> B2
     end
     
     subgraph "Kết quả"
         direction TB
-        R1[Tìm thấy vị trí] --> R2{vị trí == piles.end()?}
-        R2 -- Có --> R3[Thêm mới]
-        R2 -- Không --> R4[Thay thế]
+        R1["Tìm thấy vị trí"] --> R2{"vị trí == piles.end()?"}
+        R2 -- "Có" --> R3["Thêm mới"]
+        R2 -- "Không" --> R4["Thay thế"]
     end
     
     B1 --> R1
@@ -76,15 +76,15 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    A[Khởi tạo lis rỗng] --> B{piles rỗng?}
-    B -- Có --> C[Trả về lis rỗng]
-    B -- Không --> D[idx = piles.back()]
-    D --> E[Thêm idx vào lis]
-    E --> F[idx = prev[idx]]
-    F --> G{idx == -1?}
-    G -- Có --> H[Đảo ngược lis]
-    G -- Không --> E
-    H --> I[Trả về lis]
+    A["Khởi tạo lis rỗng"] --> B{"piles rỗng?"}
+    B -- "Có" --> C["Trả về lis rỗng"]
+    B -- "Không" --> D["idx = piles.back()"]
+    D --> E["Thêm idx vào lis"]
+    E --> F["idx = prev[idx]"]
+    F --> G{"idx == -1?"}
+    G -- "Có" --> H["Đảo ngược lis"]
+    G -- "Không" --> E
+    H --> I["Trả về lis"]
 ```
 
 ## Ví dụ minh họa
